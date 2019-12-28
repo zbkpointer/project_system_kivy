@@ -1,0 +1,52 @@
+syntax = "proto2";
+
+package proto;
+
+import "alarm.proto";
+
+message MessageBase{
+
+    required Header header = 1;
+    optional Body body = 2;
+
+    enum MessageType{
+        SERVICE_REQ = 0;
+        /**
+         * 业务响应（应答）消息
+         */
+        SERVICE_RESP = 1;
+        /**
+         * 业务ONE WAY消息（既是请求消息又是响应消息）
+         */
+        ONE_WAY = 2;
+        /**
+         * 握手请求消息
+         */
+        LOGIN_REQ = 3;
+        /**
+         * 握手响应（应答）消息
+         */
+        LOGIN_RESP = 4;
+        /**
+         * 心跳请求消息
+         */
+        HEARTBEAT_REQ = 5;
+        /**
+         * 心跳响应（应答）消息
+         */
+        HEARTBEAT_RESP = 6;
+
+    }
+
+    message Header{
+        required MessageType type = 1 [default = SERVICE_REQ];
+
+    }
+
+    message Body{
+        optional Alarm context = 1;
+    }
+
+
+}
+

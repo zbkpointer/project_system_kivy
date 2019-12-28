@@ -1,0 +1,15 @@
+syntax = "proto2";
+
+package proto;
+
+message Alarm {
+
+    optional string community = 2;
+    required int32 building_id = 3;
+    optional string  building_part = 4;
+    required int32 cell_id = 5;
+    required int32 room_id = 6;
+    required string alarm_category = 7;
+    optional string attachment = 8;
+
+}
