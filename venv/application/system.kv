@@ -1,0 +1,104 @@
+#:kivy 1.11
+
+<SystemLayout>:
+    orientation: 'vertical'
+    spacing: 0.5
+    Label:
+        background_color: 0, 0, 0, 1
+        size_hint: 1, 0.15
+        text: 'Crawler System'
+        font_size: 20
+
+    BoxLayout:
+        orientation: 'horizontal'
+
+        BoxLayout:
+            orientation: 'vertical'
+            size_hint: 0.3, 1
+
+            Button:
+                size_hint: 1, 0.15
+                text: 'information'
+
+            GridLayout:
+
+                rows: 6
+                cols: 2
+
+                Label:
+                    id: cpu_temp_id
+                Label:
+                    id: cpu_usage_id
+                Label:
+                    id: cpu_temp
+                    text: '#NA'
+                Label:
+                    id: cpu_percent
+                    text: 'cpu'
+                Label:
+                    id: mem_usage_id
+                Label:
+                    text: 'cpu'
+                Label:
+                    id: mem_usage
+                    text: '#NA'
+                Label:
+                    text: 'cpu'
+                Label:
+                    text: 'cpu'
+                Label:
+                    text: 'cpu'
+                Label:
+                    text: '#NA'
+                Label:
+                    text: '#NA'
+
+        BoxLayout:
+            orientation: 'vertical'
+
+            BoxLayout:
+                orientation: 'horizontal'
+                size_hint: 1, 0.15
+
+                Button:
+                    text: app.name
+                Button:
+                Button:
+                    text: 'view is %s'% view.state
+                Button:
+                    id: view
+                    on_press: root.view()
+                    text: 'view'
+
+            RecycleView:
+                id: rv
+                scroll_type: ['bars', 'content']
+                scroll_wheel_distance: dp(114)
+                bar_width: dp(10)
+                # needed dispaly content
+                viewclass: 'Row'
+                RecycleBoxLayout:
+                    default_size: None, dp(56)
+                    default_size_hint: 1, None
+                    size_hint_y: None
+                    height: self.minimum_height
+                    orientation: 'vertical'
+                    spacing: dp(2)
+
+
+    Button:
+        size_hint: 1, 0.15
+        text: 'Crawler System'
+
+
+<Row@BoxLayout>:
+    canvas.before:
+        Color:
+            rgba: 0.5, 0.5, 0.5, 1
+        Rectangle:
+            size: self.size
+            pos: self.pos
+    value: ''
+    Label:
+        text: root.value
+        font_size: 16
