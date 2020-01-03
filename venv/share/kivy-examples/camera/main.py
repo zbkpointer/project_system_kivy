@@ -13,7 +13,15 @@ throw an exception during the kv language processing.
 # from kivy.logger import Logger
 # import logging
 # Logger.setLevel(logging.TRACE)
-
+from kivy.config import Config
+# 设置中文字体
+Config.set('kivy', 'default_font', [
+    'Roboto',
+    'data/fonts/Roboto-Regular.ttf',
+    'data/fonts/Roboto-Italic.ttf',
+    'data/fonts/Roboto-Bold.ttf',
+    'data/fonts/Roboto-BoldItalic.ttf'])
+#Config.write()
 from kivy.app import App
 from kivy.lang import Builder
 from kivy.uix.boxlayout import BoxLayout

@@ -45,12 +45,14 @@
                 Label:
                     text: 'cpu'
                 Label:
-                    text: 'cpu'
+                    id: down_net_speed_id
                 Label:
-                    text: 'cpu'
+                    id: up_net_speed_id
                 Label:
+                    id: down_net_speed
                     text: '#NA'
                 Label:
+                    id: up_net_speed
                     text: '#NA'
 
         BoxLayout:
@@ -63,6 +65,8 @@
                 Button:
                     text: app.name
                 Button:
+                    text: 'phone'
+                    on_press: root.phone()
                 Button:
                     text: 'view is %s'% view.state
                 Button:
@@ -84,11 +88,22 @@
                     height: self.minimum_height
                     orientation: 'vertical'
                     spacing: dp(2)
-
-
-    Button:
-        size_hint: 1, 0.15
-        text: 'Crawler System'
+    RelativeLayout:
+        size_hint: 1,0.15
+        Button:
+            #size_hint: 1, 0.15
+            pos: 0,0
+            text: 'Crawler System'
+        Label:
+            id: time
+            size_hint: 0.2, 0.1
+            pos_hint: {'x':0.8,'y':0.6}
+            text: '18:34'
+        Label:
+            id: date
+            size_hint: 0.2, 0.1
+            pos_hint: {'x':0.8,'y':0.3}
+            text: '2019/1/3'
 
 
 <Row@BoxLayout>:
@@ -102,3 +117,5 @@
     Label:
         text: root.value
         font_size: 16
+
+

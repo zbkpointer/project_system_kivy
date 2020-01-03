@@ -1,5 +1,12 @@
 import kivy
 kivy.require('1.2.0')
+from kivy.config import Config
+Config.set('kivy', 'default_font', [
+    'Roboto',
+    'data/fonts/Roboto-Regular.ttf',
+    'data/fonts/Roboto-Italic.ttf',
+    'data/fonts/Roboto-Bold.ttf',
+    'data/fonts/Roboto-BoldItalic.ttf'])
 
 from sys import argv
 from os.path import dirname, join
