@@ -8,6 +8,7 @@ Config.set('kivy','default_font',['chinese','..\\fonts\\Alibaba-PuHuiTi-Regular.
 
 
 from kivy.app import App
+
 from kivy.uix.boxlayout import BoxLayout
 from kivy.lang import Builder
 from kivy.clock import Clock
@@ -176,6 +177,8 @@ class SystemLayout(BoxLayout):
 class SystemApp(App):
 
     def build(self):
+        #基于类名自动创建初始文件
+        print('系统配置文件存储位置为：' + str(App.get_application_config(self)))
         return SystemLayout()
 
 
