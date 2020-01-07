@@ -50,34 +50,38 @@ def unpack(recv_data,length=4) -> message_pb2.MessageBase:
 
 if __name__ == '__main__':
 
+    #print(__name__)
+
     # create a Tcp/ip socket object
-    # socket_client = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
-    #
-    # remote_address = ('192.168.0.100',5000)
-    #
-    # socket_client.connect_ex(remote_address)
-    #
-    # # emit the message
-    # socket_client.send(pack_data(4,'big'))
-    #
-    # recv_data = socket_client.recv(1024)
-    #
-    # message = unpack(recv_data,length=4)
-    # print('接收返回的' + message.body.context.building_part)
+    socket_client = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+
+    remote_address = ('192.168.0.100',5000)
+
+    socket_client.connect_ex(remote_address)
+
+    print('连接服务器：' + '192.168.0.100 : 5000')
+
+    # emit the message
+    socket_client.send(pack_data(4,'big'))
+
+    recv_data = socket_client.recv(1024)
+
+    message = unpack(recv_data,length=4)
+    print('接收服务器返回的消息类型：' + str(message.header.type))
 
 
-    # socket_client.close()
+    socket_client.close()
 
-    send_data = pack_data(4,'big')
+    # send_data = pack_data(4,'big')
+    # #
+    # # print(len(send_data))
     #
-    # print(len(send_data))
-
-    abytes = b'\n\x02\x12*'
-    bbytes = b'"('
-
-    print(len(abytes))
-    print(abytes[3])
-    print(bbytes[0])
+    # abytes = b'\n\x02\x12*'
+    # bbytes = b'"('
+    #
+    # print(len(abytes))
+    # print(abytes[3])
+    # print(bbytes[0])
 
 
 

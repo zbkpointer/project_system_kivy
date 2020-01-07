@@ -2,6 +2,7 @@ import kivy
 kivy.require('1.11.1')
 
 from kivy.config import Config
+print(Config.get('kivy','default_font'))
 # 设置中文字体
 Config.set('kivy','default_font',['chinese','..\\fonts\\Alibaba-PuHuiTi-Regular.ttf','..\\fonts\\msgothic.ttc','..\\fonts\\ChangFangSong.ttf'])
 # Config.write()
@@ -19,6 +20,7 @@ from kivy.uix.gridlayout import GridLayout
 from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.relativelayout import RelativeLayout
 from kivy.uix.camera import Camera
+import cv2
 from kivy.uix.video import Video
 from functools import partial
 from datetime import date
@@ -63,6 +65,7 @@ class SystemLayout(BoxLayout):
     '''
         展示CPU使用率
     '''
+
     def display_cpu_percent(self,dt):
         percent = str(psutil.cpu_percent(interval=None))
         self.ids.cpu_percent.text = percent
@@ -128,7 +131,9 @@ class SystemLayout(BoxLayout):
         button = Button(text='挂断',size_hint=(0.3,0.15),pos_hint= {'x':.35, 'y':.05})
         #button.pos_x = 370
         #label = Label(text='内容',size_hint=(None, None),size=(300,500))
-        camera = Camera(resolution=(480, 640),play=True,pos=(0,-80))
+
+        #初始化摄像头，此时Play=False
+        camera = Camera(resolution=(480, 640),play=False,pos=(0,-80))
 
         filename = 'E:\\PythonProjects\\project_kivy\\venv\\share\\kivy-examples\\widgets\\cityCC0.mpg'
         video = Video(source=filename,play='True',pos=(0,120))
@@ -149,13 +154,22 @@ class SystemLayout(BoxLayout):
 
         #button.pos_x = popup.center_x + (popup.size[0] - button.size[0])/2
         #print(camera.size)
+
+        print(camera.properties())
+        #print(popup.proxy_ref)
         '''
             摄像头没有释放
         '''
-        button.bind(on_press=(popup.dismiss))
+        button.bind(on_press=popup.dismiss)
+        #button.bind(on_touch_down=cv2.)
+
+        #button.bind(on_press=)
+        #popup.bind(on_dismiss=self.play)
+
         popup.open()
 
-
+        # 稍后启动摄像头
+        camera.play = True
 
 
     '''
@@ -176,9 +190,13 @@ class SystemLayout(BoxLayout):
 
 class SystemApp(App):
 
+    #重写这个方法创建APP
     def build(self):
         #基于类名自动创建初始文件
         print('系统配置文件存储位置为：' + str(App.get_application_config(self)))
+        #config = self.config
+
+
         return SystemLayout()
 
 
