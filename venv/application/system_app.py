@@ -133,12 +133,12 @@ class SystemLayout(BoxLayout):
         #label = Label(text='内容',size_hint=(None, None),size=(300,500))
 
         #初始化摄像头，此时Play=False
-        camera = Camera(resolution=(480, 640),play=False,pos=(0,-80))
+        camera = Camera(id='camera',resolution=(480, 640),play=False,pos=(0,-80))
 
         filename = 'E:\\PythonProjects\\project_kivy\\venv\\share\\kivy-examples\\widgets\\cityCC0.mpg'
         video = Video(source=filename,play='True',pos=(0,120))
 
-        relaytiveLayout = RelativeLayout()
+        relaytiveLayout = RelativeLayout(id='phone')
         relaytiveLayout.add_widget(camera)
         relaytiveLayout.add_widget(video)
         relaytiveLayout.add_widget(button)
@@ -148,19 +148,38 @@ class SystemLayout(BoxLayout):
         # floatLayout.add_widget(label)
         # floatLayout.add_widget(relaytiveLayout)
 
+        #覆盖整个窗口
         popup = Popup(title='正在与谁通话',
                       content=relaytiveLayout,
                       size_hint=(None, None),size=(300,500), auto_dismiss=False)
 
+        #self.proxy_ref.add_widget(popup)
+        print(popup.parent)
+
+        popup.id = 'popup'
+
         #button.pos_x = popup.center_x + (popup.size[0] - button.size[0])/2
         #print(camera.size)
 
-        print(camera.properties())
+        #print(self.children[0].children)
+        #print(self.ids.popup)
+
+
+
+        #print(camera.properties())
+
+
+        #print(self.id['camera'])
+        #print(type(self.id['popup']))
+
+
+
         #print(popup.proxy_ref)
         '''
-            摄像头没有释放
+            摄像头没有释放,因为属性play值为True
         '''
         button.bind(on_press=popup.dismiss)
+
         #button.bind(on_touch_down=cv2.)
 
         #button.bind(on_press=)
@@ -168,8 +187,34 @@ class SystemLayout(BoxLayout):
 
         popup.open()
 
+        for widget in self.walk():
+            print('{} -> {}'.format(widget, widget.id))
+            # if isinstance(widget,RelativeLayout):
+            #     #print('{} -> {}'.format(widget,widget.id))
+            #     for child in widget.walk():
+            #         print('{} -> {}'.format(child, child.id))
+
+        #为什么需要obj,其他值也可以，或许需要它来绑定事件的对象
+        def closeCamera(obj):
+            print(camera.play)
+            #print(str(obj))
+            camera.play = False
+            print(camera.play)
+
+        popup.bind(on_dismiss=closeCamera)
+
+
         # 稍后启动摄像头
         camera.play = True
+
+
+    def dismiss(self,instance):
+        #self.id['camera'].paly = False
+        #self.id['popup'].dismiss()
+        print(self.ids['camera'].paly)
+        #self.get
+        print(self.id['popup'])
+
 
 
     '''
@@ -183,6 +228,7 @@ class SystemLayout(BoxLayout):
         #print(self.ids.view.state)
         #print(self.ids.view.__self__)
         print(self.ids.rv.data[9])
+        #print(self.ids.row)
 
 
 
