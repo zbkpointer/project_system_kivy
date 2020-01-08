@@ -135,8 +135,12 @@ class SystemLayout(BoxLayout):
         #初始化摄像头，此时Play=False
         camera = Camera(id='camera',resolution=(480, 640),play=False,pos=(0,-80))
 
-        filename = 'E:\\PythonProjects\\project_kivy\\venv\\share\\kivy-examples\\widgets\\cityCC0.mpg'
-        video = Video(source=filename,play='True',pos=(0,120))
+        #filename = 'E:\\PythonProjects\\project_kivy\\venv\\share\\kivy-examples\\widgets\\cityCC0.mpg'
+        #filename = 'http://192.168.0.100:8080/'
+        #filename = 'udp://@192.168.0.100:1234'
+        #filename = 'rtsp://192.168.0.100:8554/'
+        filename = 'http://192.168.0.100:6060'
+        video = Video(source=filename,play='True',pos=(0,120),volume=0.8)
 
         relaytiveLayout = RelativeLayout(id='phone')
         relaytiveLayout.add_widget(camera)
@@ -172,9 +176,9 @@ class SystemLayout(BoxLayout):
         #print(self.id['camera'])
         #print(type(self.id['popup']))
 
-
-
         #print(popup.proxy_ref)
+
+
         '''
             摄像头没有释放,因为属性play值为True
         '''
@@ -201,11 +205,16 @@ class SystemLayout(BoxLayout):
             camera.play = False
             print(camera.play)
 
-        popup.bind(on_dismiss=closeCamera)
+        def closeVideo(obj):
+            video.play = False
+
+        button.bind(on_press=closeCamera)
+        button.bind(on_press=closeVideo)
 
 
         # 稍后启动摄像头
         camera.play = True
+        #video.paly = True
 
 
     def dismiss(self,instance):
@@ -229,9 +238,6 @@ class SystemLayout(BoxLayout):
         #print(self.ids.view.__self__)
         print(self.ids.rv.data[9])
         #print(self.ids.row)
-
-
-
 
 
 class SystemApp(App):
