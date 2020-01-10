@@ -40,6 +40,15 @@ def product_data() ->list:
      for x in range(10)]
     return dictsList
 
+def s2t(sec) ->str:
+    m, s = divmod(sec,60)
+    h, m = divmod(m ,60)
+
+    if h == 0 :
+        return ("%02d:%02d" % (m , s))
+    else:
+        return ("%02d:%02d:%02d" % ( h, m , s))
+
 
 class SystemLayout(BoxLayout):
 
@@ -248,7 +257,7 @@ class SystemLayout(BoxLayout):
             #print(count)
             #true
             #print(str(video.duration))
-            phoneTime.text = str(count)
+            phoneTime.text = str(s2t(count))
 
         phone_time_callback = Clock.schedule_interval(displayPhoneTime, 1.)
         video.bind(on_play=phone_time_callback)
@@ -299,6 +308,8 @@ class SystemLayout(BoxLayout):
         #print(self.ids.view.__self__)
         print(self.ids.rv.data[9])
         #print(self.ids.row)
+
+
 
 
 class SystemApp(App):
