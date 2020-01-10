@@ -12,7 +12,7 @@
 	</PropertyGroup>
 	<ItemDefinitionGroup>
 		<ClCompile>
-			<AdditionalIncludeDirectories>$(GSTREAMER_1_0_ROOT_X86_64)\include\libsoup-2.4;$(GSTREAMER_1_0_ROOT_X86_64)\include\libxml2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+			<AdditionalIncludeDirectories>$(GSTREAMER_1_0_ROOT_X86_64)\include\libxml2;$(GSTREAMER_1_0_ROOT_X86_64)\include\libsoup-2.4;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
 		</ClCompile>
 		<Link>
 			<AdditionalLibraryDirectories>;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>

@@ -14,7 +14,7 @@
 		</ClCompile>
 		<Link>
 			<AdditionalLibraryDirectories>;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-			<AdditionalDependencies>mms.lib;m.lib;%(AdditionalDependencies)</AdditionalDependencies>
+			<AdditionalDependencies>m.lib;mms.lib;%(AdditionalDependencies)</AdditionalDependencies>
 		</Link>
 	</ItemDefinitionGroup>
 	<ItemGroup/>

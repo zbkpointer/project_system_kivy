@@ -21,9 +21,9 @@ import os
 import subprocess
 import sys
 
-LIBDIR = r'c:/gstreamer/1.0/x86_64/lib'
-BUILDDIR = r'd:\projects\cerbero\autotools\master\build\sources\msvc_x86_64\gst-validate-1.16.0\_builddir\validate\tools'
-SRCDIR = r'd:\projects\cerbero\autotools\master\build\sources\msvc_x86_64\gst-validate-1.16.0\validate\tools'
+LIBDIR = r'C:/MinGW/msys/1.0/home/cerbero/cerbero-1.16/build/dist/msvc_x86_64/lib'
+BUILDDIR = r'C:\MinGW\msys\1.0\home\cerbero\cerbero-1.16\build\sources\msvc_x86_64\gst-validate-1.16.2\_builddir\validate\tools'
+SRCDIR = r'C:\MinGW\msys\1.0\home\cerbero\cerbero-1.16\build\sources\msvc_x86_64\gst-validate-1.16.2\validate\tools'
 GIT_FIRST_HASH = 'da962d096af9460502843e41b7d25fdece7ff1c2'
 
 

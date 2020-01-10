@@ -1,5 +1,7 @@
 import kivy
 kivy.require('1.11.1')
+# import os
+# print(str(os.environ['KIVY_DOC']))
 
 from kivy.config import Config
 print(Config.get('kivy','default_font'))
@@ -20,6 +22,7 @@ from kivy.uix.gridlayout import GridLayout
 from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.relativelayout import RelativeLayout
 from kivy.uix.camera import Camera
+from kivy.properties import NumericProperty
 import cv2
 from kivy.uix.video import Video
 from functools import partial
@@ -40,8 +43,14 @@ def product_data() ->list:
 
 class SystemLayout(BoxLayout):
 
+    #count = NumericProperty(0)
+    # global count
+    # count = 0
+
     def __init__(self, **kwargs):
+
         super(SystemLayout, self).__init__(**kwargs)
+
         #Clock.schedule_interval(self.display_cpu_temp,1/2.)
         # 计算网络速度
         self.last_bytes_recv = psutil.net_io_counters().bytes_recv
@@ -61,6 +70,8 @@ class SystemLayout(BoxLayout):
         Clock.schedule_interval(self.display_up_net_speed, 1.)
         Clock.schedule_interval(self.display_date_time, 1.)
         #Clock.schedule_once(self.pop_up_window, 2.)
+
+
 
     '''
         展示CPU使用率
@@ -128,24 +139,41 @@ class SystemLayout(BoxLayout):
         打电话
     '''
     def phone(self):
+
         button = Button(text='挂断',size_hint=(0.3,0.15),pos_hint= {'x':.35, 'y':.05})
+
         #button.pos_x = 370
         #label = Label(text='内容',size_hint=(None, None),size=(300,500))
 
         #初始化摄像头，此时Play=False
         camera = Camera(id='camera',resolution=(480, 640),play=False,pos=(0,-80))
+        phoneTime = Label(text="00:00",pos_hint={'x':.15,'y':.55})
 
         #filename = 'E:\\PythonProjects\\project_kivy\\venv\\share\\kivy-examples\\widgets\\cityCC0.mpg'
         #filename = 'http://192.168.0.100:8080/'
-        #filename = 'udp://@192.168.0.100:1234'
-        #filename = 'rtsp://192.168.0.100:8554/'
-        filename = 'http://192.168.0.100:6060'
+        #filename = 'udp://@:192.168.0.100:1234'
+        #filename = 'rtsp://192.168.0.100:8554/play'
+
+        filename = 'rtsp://192.168.0.100:8554/play'
+        #filename = 'http://192.168.0.100:6060'
+
+        '''
+            当两次连接时，可以正常看视频，当有视频出现，显示视频纹理
+            size默认值为(100,100)
+            ？添加部件通话时长
+            连接成功后，得到视频数据时，显示（如何判断）
+        '''
         video = Video(source=filename,play='True',pos=(0,120),volume=0.8)
+        #通话时间
+        count = 0
+
 
         relaytiveLayout = RelativeLayout(id='phone')
         relaytiveLayout.add_widget(camera)
+        relaytiveLayout.add_widget(phoneTime)
         relaytiveLayout.add_widget(video)
         relaytiveLayout.add_widget(button)
+
 
         # label = Label(text='内容',size_hint=(None, None))
         # floatLayout = FloatLayout(size_hint=(None, None),size=(400, 600))
@@ -158,7 +186,7 @@ class SystemLayout(BoxLayout):
                       size_hint=(None, None),size=(300,500), auto_dismiss=False)
 
         #self.proxy_ref.add_widget(popup)
-        print(popup.parent)
+        #print(popup.parent)
 
         popup.id = 'popup'
 
@@ -207,14 +235,47 @@ class SystemLayout(BoxLayout):
 
         def closeVideo(obj):
             video.play = False
+            video.unload()
+            Clock.unschedule(phone_time_callback)
+
+
+        def displayPhoneTime(*largs):
+            # obj is float
+            # print('obj is',type(largs))
+            # print(largs)
+            nonlocal count
+            count = count + 1
+            #print(count)
+            #true
+            #print(str(video.duration))
+            phoneTime.text = str(count)
+
+        phone_time_callback = Clock.schedule_interval(displayPhoneTime, 1.)
+        video.bind(on_play=phone_time_callback)
+        #video.bind(play=phone_time_callback)
+
 
         button.bind(on_press=closeCamera)
         button.bind(on_press=closeVideo)
 
 
+
         # 稍后启动摄像头
         camera.play = True
         #video.paly = True
+
+    '''
+        摄像头视频串流
+    '''
+
+    def streamCamera(self):
+
+        pass
+
+
+
+
+
 
 
     def dismiss(self,instance):

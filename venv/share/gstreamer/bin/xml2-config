@@ -1,9 +1,9 @@
 #! /bin/sh
 
-prefix=/c/gstreamer/1.0/x86_64
+prefix=/C/MinGW/msys/1.0/home/cerbero/cerbero-1.16/build/dist/msvc_x86_64
 exec_prefix=${prefix}
 includedir=${prefix}/include
-libdir=/c/gstreamer/1.0/x86_64/lib
+libdir=/C/MinGW/msys/1.0/home/cerbero/cerbero-1.16/build/dist/msvc_x86_64/lib
 
 usage()
 {
@@ -58,7 +58,7 @@ while test $# -gt 0; do
       ;;
 
     --version)
-	echo 2.9.7
+	echo 2.9.9
 	exit 0
 	;;
 
@@ -86,12 +86,12 @@ while test $# -gt 0; do
 	then
 	    if [ "-L${libdir}" = "-L/usr/lib" -o "-L${libdir}" = "-L/usr/lib64" ]
 	    then
-		echo -lxml2 -Lc:/gstreamer/1.0/x86_64/lib -lz       
+		echo -lxml2 -LC:/MinGW/msys/1.0/home/cerbero/cerbero-1.16/build/dist/msvc_x86_64/lib -lz       
 	    else
-		echo -L${libdir} -lxml2 -Lc:/gstreamer/1.0/x86_64/lib -lz       
+		echo -L${libdir} -lxml2 -LC:/MinGW/msys/1.0/home/cerbero/cerbero-1.16/build/dist/msvc_x86_64/lib -lz       
 	    fi
 	else
-	    echo -L${libdir} -lxml2 -Lc:/gstreamer/1.0/x86_64/lib -lz        -lws2_32
+	    echo -L${libdir} -lxml2 -LC:/MinGW/msys/1.0/home/cerbero/cerbero-1.16/build/dist/msvc_x86_64/lib -lz        -lws2_32
 	fi
        	;;
 

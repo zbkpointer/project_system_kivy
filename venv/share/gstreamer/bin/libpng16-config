@@ -11,10 +11,10 @@
 
 # Modeled after libxml-config.
 
-version="1.6.35"
-prefix="/c/gstreamer/1.0/x86_64"
+version="1.6.37"
+prefix="/C/MinGW/msys/1.0/home/cerbero/cerbero-1.16/build/dist/msvc_x86_64"
 exec_prefix="${prefix}"
-libdir="/c/gstreamer/1.0/x86_64/lib"
+libdir="/C/MinGW/msys/1.0/home/cerbero/cerbero-1.16/build/dist/msvc_x86_64/lib"
 includedir="${prefix}/include/libpng16"
 libs="-lpng16"
 all_libs="-lpng16 -lz "

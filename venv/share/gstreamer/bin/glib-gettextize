@@ -41,15 +41,15 @@ version=2.56.1
 try_ln_s=:
 
 # Directory where the sources are stored.
-prefix=c:/gstreamer/1.0/x86_64
+prefix=C:/MinGW/msys/1.0/home/cerbero/cerbero-1.16/build/dist/msvc_x86_64
 case `uname` in
 MINGW32*)
     prefix="`dirname $0`/.."
     ;;
 esac
 
-datarootdir=c:/gstreamer/1.0/x86_64/share
-datadir=c:/gstreamer/1.0/x86_64/share
+datarootdir=C:/MinGW/msys/1.0/home/cerbero/cerbero-1.16/build/dist/msvc_x86_64/share
+datadir=C:/MinGW/msys/1.0/home/cerbero/cerbero-1.16/build/dist/msvc_x86_64/share
 
 gettext_dir=$datadir/glib-2.0/gettext
 
