@@ -1,5 +1,6 @@
 import kivy
 kivy.require('1.11.1')
+
 # import os
 # print(str(os.environ['KIVY_DOC']))
 
@@ -57,7 +58,6 @@ class SystemLayout(BoxLayout):
     # count = 0
 
     def __init__(self, **kwargs):
-
         super(SystemLayout, self).__init__(**kwargs)
 
         #Clock.schedule_interval(self.display_cpu_temp,1/2.)
@@ -79,6 +79,8 @@ class SystemLayout(BoxLayout):
         Clock.schedule_interval(self.display_up_net_speed, 1.)
         Clock.schedule_interval(self.display_date_time, 1.)
         #Clock.schedule_once(self.pop_up_window, 2.)
+
+        #print(type(self.get_parent_window()))
 
 
 
@@ -171,6 +173,7 @@ class SystemLayout(BoxLayout):
             size默认值为(100,100)
             ？添加部件通话时长
             连接成功后，得到视频数据时，显示（如何判断）
+            VLC RTSP通过UDP实现，Gstream通过什么？
         '''
         video = Video(source=filename,play='True',pos=(0,120),volume=0.8)
         #通话时间
